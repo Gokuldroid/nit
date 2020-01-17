@@ -5,36 +5,32 @@ const os = require('os');
 const actionColorMap = require('./constants/action-color-map');
 const confirm = require('./utils/confirm');
 
+
+const getStagedFiles = async () => {
+  let files = await execCommand('git diff --name-only --cached');
+  return files.trim().split(os.EOL);
+}
+
 const getUnStagedFiles = async () => {
-  let files = await execCommand('git diff --name-only');
+  let files = await execCommand('git status -s -u');
+  let stagedFiles = await getStagedFiles();
+
   files = files.trim().split(os.EOL);
-  let options = files.filter((file) => file && file.length != 0).map((file) => {
+  let options = files.filter((file) => file && file.length != 0 && !stagedFiles.includes(file)).map((file) => {
     let action = file.trim().charAt(0);
-    let name = file.trim().substring(0).trim();
+    let name = file.trim().substring(2).trim();
     return {
-      name: name,
-      value: name,
+      name: { name, action },
       message: actionColorMap(action) + " " + name
     }
   });
-
-  let deletedFiles = await execCommand('git ls-files -d');
-  deletedFiles = deletedFiles.trim().split(os.EOL);
-  let deletedFilesOptions = deletedFiles.filter((file) => file && file.length != 0).map((file) => {
-    return {
-      name: file,
-      value: file,
-      message: actionColorMap('D') + " " + file
-    }
-  });
-
-  return [...options, ...deletedFilesOptions];
+  return options;
 }
 
 const discardFiles = async (argv) => {
   let modifiedFiles = await getUnStagedFiles();
 
-  if(modifiedFiles.length == 0) {
+  if (modifiedFiles.length == 0) {
     console.log('Branch is clean!');
     return;
   }
@@ -45,7 +41,24 @@ const discardFiles = async (argv) => {
   });
 
   if (result.length != 0 && await confirm(`Are you sure want to discard ${result} files?`)) {
-    await execCommand('git checkout -- ' + result.reduce((current, file) => current + ' ' + file), '');
+    let trackedFiles = [];
+    let untrackedFiles = [];
+
+    result.forEach((fileStatus) => {
+      if(fileStatus.action == '?') {
+        untrackedFiles.push(fileStatus.name);
+      } else {
+        trackedFiles.push(fileStatus.name);
+      }
+    });
+
+    if (trackedFiles.length != 0) {
+      await execCommand('git checkout -q -- ' + trackedFiles.reduce((current, file) => current + ' ' + file), '');
+    }
+
+    if (untrackedFiles.length != 0) {
+      await execCommand('git clean -f -q -- ' + untrackedFiles.reduce((current, file) => current + ' ' + file), '');
+    }
   }
 };
 
