@@ -1,7 +1,7 @@
 {
-  "name": "progit",
+  "name": "@lazyloop/nit",
   "version": "1.0.0",
-  "description": "Git cli tool which makes life easier",
+  "description": "Git cli tool which makes our life easier",
   "bin": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Gokuldroid/progit.git"
+    "url": "https://github.com/Gokuldroid/nit.git"
   },
   "author": "Gokul prabhu <gokulprabhu.droid@gmail.com>",
   "license": "MIT",
