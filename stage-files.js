@@ -24,7 +24,7 @@ const getStagedFiles = async () => {
 const getModifiedFiles = async () => {
   let files = await execCommand('git status -s');
   files = files.trim().split(os.EOL);
-  let options = files.map((file) => {
+  let options = files.filter((file) => file && file.length != 0).map((file) => {
     let action = file.trim().charAt(0);
     let name = file.trim().substring(2).trim();
     return {
