@@ -17,9 +17,9 @@
   "author": "Gokul prabhu <gokulprabhu.droid@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "ansi-colors": "^4.1.1",
     "enquirer": "^2.3.4",
     "fuzzy": "^0.1.3",
-    "prompts": "^2.3.0",
     "yargs": "^15.1.0"
   }
 }
