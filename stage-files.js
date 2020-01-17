@@ -37,8 +37,13 @@ const getModifiedFiles = async () => {
 }
 
 const stageFiles = async (argv) => {
-
   let modifiedFiles = await getModifiedFiles();
+
+  if(modifiedFiles.length == 0) {
+    console.log('Branch is clean!');
+    return;
+  }
+
   let stagedFiles = await getStagedFiles();
   let initialValues = [];
   modifiedFiles.forEach((value, index) => {
