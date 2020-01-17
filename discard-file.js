@@ -2,8 +2,19 @@
 const execCommand = require('./utils/exec-command');
 const promptMultiSelect = require('./utils/multi-select');
 const os = require('os');
-const actionColorMap = require('./constants/action-color-map');
+const colors = require('ansi-colors');
 
+const actionColorMap = {
+  "A": colors.green('A'),
+  "C": colors.magenta('C'),
+  "D": colors.red('D'),
+  "M": colors.blue('M'),
+  "R": colors.yellow('R'),
+  "T": colors.yellow('T'),
+  "U": colors.white('U'),
+  "X": colors.red('X'),
+  "B": colors.red('B')
+}
 
 const getStagedFiles = async () => {
   let files = await execCommand('git diff --name-only --cached');
@@ -11,7 +22,7 @@ const getStagedFiles = async () => {
 }
 
 const getModifiedFiles = async () => {
-  let files = await execCommand('git status -s -u');
+  let files = await execCommand('git status -s');
   files = files.trim().split(os.EOL);
   let options = files.filter((file) => file && file.length != 0).map((file) => {
     let action = file.trim().charAt(0);
@@ -19,7 +30,7 @@ const getModifiedFiles = async () => {
     return {
       name: name,
       value: name,
-      message: actionColorMap(action) + " " + name
+      message: (actionColorMap[action] || actionColorMap['U']) + " " + name
     }
   });
   return options;
@@ -28,7 +39,7 @@ const getModifiedFiles = async () => {
 const stageFiles = async (argv) => {
   let modifiedFiles = await getModifiedFiles();
 
-  if(modifiedFiles.length == 0) {
+  if (modifiedFiles.length == 0) {
     console.log('Branch is clean!');
     return;
   }
