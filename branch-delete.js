@@ -33,7 +33,7 @@ const deleteBranch = async (argv) => {
 };
 
 module.exports = (yargsBuilder) => {
-  return yargsBuilder.command('del', 'Delete branch', {
+  return yargsBuilder.command('delete', 'Delete branch', {
     remote: {
       alias: 'r',
       describe: 'Delete remote branch'
@@ -42,5 +42,6 @@ module.exports = (yargsBuilder) => {
       alias: 'm',
       describe: 'Delete multiple branch at once'
     }
-  }, deleteBranch);
+  }, deleteBranch)
+  .alias('delete', 'del');
 }

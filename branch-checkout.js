@@ -21,10 +21,11 @@ const checkoutBranch = async (argv) => {
 };
 
 module.exports = (yargsBuilder) => {
-  return yargsBuilder.command('co', 'Checkout branch', {
+  return yargsBuilder.command('checkout', 'Checkout branch', {
     remote: {
       alias: 'r',
       describe: 'Checkout remote branch'
     }
-  }, checkoutBranch);
+  }, checkoutBranch)
+  .alias('checkout', 'co');
 }
