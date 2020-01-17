@@ -1,17 +1,14 @@
-const prompts = require('enquirer');
-
+const { AutoComplete } = require('enquirer');
+const fuzzy = require('fuzzy');
 
 module.exports = async (options) => {
-  const response = await prompts(Object.assign({
-    type: 'autocompleteMultiselect',
+  const response = await new AutoComplete(Object.assign({
     name: 'value',
+    multiple: true,
     suggest: (input, choices) => {
-      return new Promise((resolve, reject) => {
-        var results = fuzzy.filter(input, choices)
-        resolve(results.map((match)=> match.string));    
-      });
+      return choices.filter((choice) => fuzzy.match(input, choice.message));
     }
-  }, options));
-  return (response.value || []).map((index) => options.choices[index]);
+  }, options)).run();
+  return response;
 };
 

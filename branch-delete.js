@@ -23,7 +23,7 @@ const deleteBranch = async (argv) => {
     return;
   }
 
-  if (await confirm(`Are you sure want to delete ${branchesToDelete} branches [y/N]?`)) {
+  if (await confirm(`Are you sure want to delete ${branchesToDelete} branches?`)) {
     for (let index = 0; index < branchesToDelete.length; index++) {
       const element = branchesToDelete[index];
       console.log('Deleting branch : ' + element);

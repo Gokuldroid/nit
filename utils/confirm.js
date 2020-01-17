@@ -1,12 +1,12 @@
-const prompts = require('prompts');
+const { Confirm } = require('enquirer');
 
 module.exports = async (message, initialValue = false) => {
- let response = await prompts({
+ let response = await new Confirm({
     type: 'confirm',
     name: 'value',
     message,
     initial: initialValue
-  });
-  return response.value;
+  }).run();
+  return response;
 };
  
