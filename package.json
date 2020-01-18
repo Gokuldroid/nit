@@ -4,7 +4,8 @@
   "description": "Git cli tool which makes our life easier",
   "bin": "./index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "keywords": [
     "Git",
@@ -21,5 +22,17 @@
     "enquirer": "^2.3.4",
     "fuzzy": "^0.1.3",
     "yargs": "^15.1.0"
+  },
+  "devDependencies": {
+    "@types/yargs": "^15.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "typescript": "^3.7.5"
   }
 }
