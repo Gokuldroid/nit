@@ -2,7 +2,7 @@
   "name": "@lazyloop/nit",
   "version": "1.0.2",
   "description": "Git cli tool which makes our life easier",
-  "bin": "./index.js",
+  "bin": "./build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"

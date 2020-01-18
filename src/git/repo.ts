@@ -35,6 +35,10 @@ export default class Repo {
     });
   }
 
+  async unStagedFiles(): Promise<File[]> {
+    return (await this.modifiedFiles()).filter((file) => !file.isStaged);
+  }
+
   private parseBranches(str: string): string[] {
     if (!str) return [];
     const lines = str.trim().split(os.EOL);
