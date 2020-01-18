@@ -54,7 +54,7 @@ export default class Repo {
   }
 
   async execCommand(cmd: string): Promise<string> {
-    console.log(cmd);
+    // console.log(cmd);
     return (await execCommand(cmd, { cwd: this.dir })).trim();
   }
 
