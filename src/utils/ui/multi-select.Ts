@@ -27,5 +27,5 @@ export default async <T>(options: any): Promise<T[]> => {
       options,
     ),
   );
-  return response;
+  return response.value;
 };
