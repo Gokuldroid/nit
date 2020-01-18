@@ -1,4 +1,3 @@
-import execCommand from '../utils/exec-command';
 import Repo from './repo';
 import colors from 'ansi-colors';
 import Selectable from '../utils/ui/selectable';
@@ -30,14 +29,14 @@ export default class File implements Selectable {
 
   async discard(): Promise<string> {
     if (this.isUnTracked) {
-      return await execCommand(`git clean -f -q -- ${this.name}`, { cwd: this.repo.dir });
+      return await this.repo.execCommand(`git clean -f -q -- ${this.name}`);
     } else {
-      return await execCommand(`git checkout -q -- ${this.name}`, { cwd: this.repo.dir });
+      return await this.repo.execCommand(`git checkout -q -- ${this.name}`);
     }
   }
 
   async stage(): Promise<string> {
-    return await execCommand(`git add ${this.name}`, { cwd: this.repo.dir });
+    return await this.repo.execCommand(`git add ${this.name}`);
   }
 
   get isUnTracked(): boolean {

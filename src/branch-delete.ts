@@ -29,7 +29,6 @@ const deleteBranch = async (argv: Arguments): Promise<void> => {
   if (await confirm(`Are you sure want to delete ${branchesToDelete} branches?`)) {
     for (let index = 0; index < branchesToDelete.length; index++) {
       const branchToDelete = branchesToDelete[index];
-      console.log(`Deleting branch : ${branchToDelete.name}`);
       // eslint-disable-next-line no-await-in-loop
       await branchToDelete.delete();
     }

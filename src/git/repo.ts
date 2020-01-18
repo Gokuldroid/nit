@@ -10,19 +10,18 @@ export default class Repo {
   }
 
   async branches(remote = false): Promise<Branch[]> {
-    const opts = { cwd: this.dir };
     let cmd = 'git branch';
     if (remote) {
       cmd += ' -r';
     }
-    const output = await execCommand(cmd, opts);
+    const output = await this.execCommand(cmd);
     return this.parseBranches(output).map((branch) => {
       return new Branch(this, branch, remote);
     });
   }
 
   async modifiedFiles(): Promise<File[]> {
-    const gitStatus = (await execCommand('git status -s -u', { cwd: this.dir })).trim();
+    const gitStatus = await this.execCommand('git status -s -u');
     if (gitStatus.length == 0) {
       return [];
     }
@@ -54,8 +53,13 @@ export default class Repo {
     return res;
   }
 
+  async execCommand(cmd: string): Promise<string> {
+    console.log(cmd);
+    return (await execCommand(cmd, { cwd: this.dir })).trim();
+  }
+
   private async stagedFileNames(): Promise<string[]> {
-    const files = (await execCommand('git diff --name-only --cached', { cwd: this.dir })).trim();
+    const files = await this.execCommand('git diff --name-only --cached');
     if (files.length == 0) {
       return [];
     } else {

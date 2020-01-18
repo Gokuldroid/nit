@@ -1,4 +1,3 @@
-import execCommand from '../utils/exec-command';
 import Repo from './repo';
 import Selectable from '../utils/ui/selectable';
 
@@ -12,14 +11,14 @@ export default class Branch implements Selectable {
     this.repo = repo;
   }
   async delete(): Promise<string> {
-    return await execCommand(`git branch -D ${this.name}`, { cwd: this.repo.dir });
+    return await this.repo.execCommand(`git branch -D ${this.name}`);
   }
 
   async checkout(): Promise<string> {
     if (this.isRemote) {
-      return await execCommand(`git checkout -t ${this.name}`, { cwd: this.repo.dir });
+      return await this.repo.execCommand(`git checkout -t ${this.name}`);
     } else {
-      return await execCommand(`git checkout ${this.name}`, { cwd: this.repo.dir });
+      return await this.repo.execCommand(`git checkout ${this.name}`);
     }
   }
 
