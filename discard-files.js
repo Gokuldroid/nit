@@ -40,7 +40,7 @@ const discardFiles = async (argv) => {
     choices: modifiedFiles
   });
 
-  if (result.length != 0 && await confirm(`Are you sure want to discard ${result} files?`)) {
+  if (result.length != 0 && await confirm(`Are you sure want to discard ${result.map((fileStatus) => fileStatus.name)} files?`)) {
     let trackedFiles = [];
     let untrackedFiles = [];
 

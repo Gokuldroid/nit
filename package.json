@@ -1,6 +1,6 @@
 {
   "name": "@lazyloop/nit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Git cli tool which makes our life easier",
   "bin": "./index.js",
   "scripts": {
