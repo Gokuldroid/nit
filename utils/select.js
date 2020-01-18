@@ -8,7 +8,7 @@ module.exports = async (options) => {
     suggest: (input, choices) => {
       return choices.filter((choice) => fuzzy.match(input, choice.message));
     },
-    footer:  '\n' + colors.bold('Enter ') + colors.green('- Proceed, ') + colors.bold('Type ') + colors.green(' - To fuzzy search')
+    footer:  '\n' + colors.bold('Enter ') + colors.green('- proceed, ') + colors.bold('Type ') + colors.green(' - to fuzzy search')
   }, options)).run();
   return response;
 };
