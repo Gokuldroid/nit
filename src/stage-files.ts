@@ -36,5 +36,5 @@ const stageFiles = async (): Promise<void> => {
 };
 
 export default (yargsBuilder: Argv): Argv => {
-  return yargsBuilder.command('add', 'Stage files', stageFiles);
+  return yargsBuilder.command('add', 'Stage files', {}, stageFiles);
 };

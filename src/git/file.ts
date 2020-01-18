@@ -19,6 +19,7 @@ export default class File implements Selectable {
   name: string;
   isStaged: boolean;
   repo: Repo;
+  private _action!: string;
 
   constructor(repo: Repo, name: string, isStaged: boolean, action: string) {
     this.repo = repo;
@@ -44,7 +45,11 @@ export default class File implements Selectable {
   }
 
   set action(action: string) {
-    this.action = action == '?' ? 'U' : action;
+    this._action = action == '?' ? 'U' : action;
+  }
+
+  get action(): string {
+    return this._action;
   }
 
   get coloredAction(): string {
