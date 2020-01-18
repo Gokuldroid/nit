@@ -19,5 +19,5 @@ export default async <T>(options: any): Promise<T | null> => {
       options,
     ),
   );
-  return response;
+  return response.value;
 };

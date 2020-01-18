@@ -17,9 +17,9 @@ export default class Branch implements Selectable {
 
   async checkout(): Promise<string> {
     if (this.isRemote) {
-      return await execCommand(`git checkout ${this.name}`, { cwd: this.repo.dir });
-    } else {
       return await execCommand(`git checkout -t ${this.name}`, { cwd: this.repo.dir });
+    } else {
+      return await execCommand(`git checkout ${this.name}`, { cwd: this.repo.dir });
     }
   }
 

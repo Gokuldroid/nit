@@ -5,7 +5,7 @@ import { match } from 'fuzzy';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async <T>(options: any): Promise<T[]> => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const response = await prompt<T[]>(
+  const response = await prompt<any>(
     Object.assign(
       {
         name: 'value',
