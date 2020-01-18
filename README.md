@@ -16,22 +16,22 @@ Git cmdline utils written in node.js
 
 `nit checkout [-r<remote>]`
 
-![demo git checkout](samples/nit_checkout.gif).
+![demo git checkout](https://raw.githubusercontent.com/Gokuldroid/nit/master/samples/nit_checkout.gif).
 
 **delete branches:**
 
 `nit delete [-m<multiple>]`
 
-![demo git delete](samples/nit_delete.gif).
+![demo git delete](https://raw.githubusercontent.com/Gokuldroid/nit/master/samples/nit_delete.gif).
 
 **stage files to commit:**
 
 `nit add`
 
-![demo git add](samples/nit_add.gif).
+![demo git add](https://raw.githubusercontent.com/Gokuldroid/nit/master/samples/nit_add.gif).
 
 **discard local changes:**
 
 `nit discard`
 
-![demo git discard](samples/nit_discard.gif).
+![demo git discard](https://raw.githubusercontent.com/Gokuldroid/nit/master/samples/nit_discard.gif).
