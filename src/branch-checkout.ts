@@ -8,8 +8,11 @@ import { toChoices } from './utils/ui/selectable';
 
 const checkoutBranch = async (argv: Arguments): Promise<string | null> => {
   const repo = new Repo();
-  const branchChoices = toChoices(await repo.branches(argv.remote as boolean));
-  const branchesToCheckout = await select<Branch>({ choices: branchChoices, message: 'Select branch to checkout' });
+  const branches = await repo.branches(argv.remote as boolean);
+  const branchesToCheckout = await select<Branch>({
+    choices: toChoices(branches),
+    message: 'Select branch to checkout',
+  });
   if (branchesToCheckout != null) {
     return branchesToCheckout.checkout();
   }
