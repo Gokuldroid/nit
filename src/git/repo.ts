@@ -22,7 +22,11 @@ export default class Repo {
   }
 
   async modifiedFiles(): Promise<File[]> {
-    const fileAndStatuses = (await execCommand('git status -s -u', { cwd: this.dir })).trim().split(os.EOL);
+    const gitStatus = (await execCommand('git status -s -u', { cwd: this.dir })).trim();
+    if (gitStatus.length == 0) {
+      return [];
+    }
+    const fileAndStatuses = gitStatus.split(os.EOL);
     const stagedFiles = await this.stagedFileNames();
 
     return fileAndStatuses.map((fileAndStatus: string) => {
